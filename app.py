@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, request
-from flask_cors import CORS, cross_origin
+from flask_cors import cross_origin
 import pickle
 
 # Load the model
@@ -8,6 +8,7 @@ model = pickle.load(open('sentiment_analysis_model.pkl', 'rb'))
 app = Flask(__name__)
 
 @app.route('/sentiment', methods=['POST'])
+@cross_origin()
 def sentiment_analysis():
     data = request.get_json()
     text = data['text']
